@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,26 @@ namespace TeamGnome.Oobe
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo
+            {
+                FileName = "net",
+                Arguments = $"user {UserText.Text} {PassText.Password} /add",
+                CreateNoWindow = true
+            };
+
+            Process p = Process.Start(psi);
+            p.WaitForExit();
+
+            psi.Arguments = $"localgroup Administrators {UserText.Text} /add";
+
+            p = Process.Start(psi);
+            p.WaitForExit();
+
+            Application.Current.Shutdown();
         }
     }
 }
