@@ -1,0 +1,97 @@
+﻿<Page x:Class="TeamGnome.Oobe.InitialPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:TeamGnome.Oobe"
+      mc:Ignorable="d"
+      d:DesignHeight="480" d:DesignWidth="640"
+      Title="Welcome" Foreground="White">
+   <Page.Resources>
+      <Storyboard x:Key="InitialAnimation">
+         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="InitialPageGrid" Storyboard.TargetProperty="(UIElement.Opacity)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
+            <SplineDoubleKeyFrame KeyTime="00:00:00.400" Value="1" />
+         </DoubleAnimationUsingKeyFrames>
+         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="InitialPageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.X)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="30" />
+            <EasingDoubleKeyFrame KeyTime="00:00:00.700" Value="0">
+               <EasingDoubleKeyFrame.EasingFunction>
+                  <CubicEase EasingMode="EaseOut" />
+               </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+         </DoubleAnimationUsingKeyFrames>
+         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="InitialPageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.8" />
+            <EasingDoubleKeyFrame KeyTime="00:00:01.300" Value="1">
+               <EasingDoubleKeyFrame.EasingFunction>
+                  <CubicEase EasingMode="EaseOut" />
+               </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+         </DoubleAnimationUsingKeyFrames>
+         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="InitialPageGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1.8" />
+            <EasingDoubleKeyFrame KeyTime="00:00:01.300" Value="1">
+               <EasingDoubleKeyFrame.EasingFunction>
+                  <CubicEase EasingMode="EaseOut" />
+               </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+         </DoubleAnimationUsingKeyFrames>
+         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Step1" Storyboard.TargetProperty="(UIElement.Opacity)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
+            <SplineDoubleKeyFrame KeyTime="00:00:00.700" Value="0" />
+            <SplineDoubleKeyFrame KeyTime="00:00:01.100" Value="1" />
+         </DoubleAnimationUsingKeyFrames>
+         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Step1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="30" />
+            <SplineDoubleKeyFrame KeyTime="00:00:00.700" Value="30" />
+            <EasingDoubleKeyFrame KeyTime="00:00:01.400" Value="0">
+               <EasingDoubleKeyFrame.EasingFunction>
+                  <CubicEase EasingMode="EaseOut" />
+               </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+         </DoubleAnimationUsingKeyFrames>
+         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Step2" Storyboard.TargetProperty="(UIElement.Opacity)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0" />
+            <SplineDoubleKeyFrame KeyTime="00:00:00.900" Value="0" />
+            <SplineDoubleKeyFrame KeyTime="00:00:01.300" Value="1" />
+         </DoubleAnimationUsingKeyFrames>
+         <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Step2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="30" />
+            <SplineDoubleKeyFrame KeyTime="00:00:00.900" Value="30" />
+            <EasingDoubleKeyFrame KeyTime="00:00:01.600" Value="0">
+               <EasingDoubleKeyFrame.EasingFunction>
+                  <CubicEase EasingMode="EaseOut" />
+               </EasingDoubleKeyFrame.EasingFunction>
+            </EasingDoubleKeyFrame>
+         </DoubleAnimationUsingKeyFrames>
+      </Storyboard>
+   </Page.Resources>
+   <Grid Name="InitialPageGrid" Loaded="InitialPageGrid_Loaded">
+      <Grid.RenderTransform>
+         <TransformGroup>
+            <ScaleTransform ScaleX="1.8" ScaleY="1.8" />
+            <TranslateTransform X="0" />
+         </TransformGroup>
+      </Grid.RenderTransform>
+      <StackPanel VerticalAlignment="Center">
+         <TextBlock FontWeight="Light" FontSize="26" Margin="0,0,0,10">A few finishing touches are required</TextBlock>
+         <StackPanel Name="StepsStackPanel" Orientation="Horizontal">
+            <TextBlock Name="Step1" FontWeight="Light" FontSize="36" Margin="0,0,0,0" Text="Computer name" Opacity="0">
+               <TextBlock.RenderTransform>
+                  <TransformGroup>
+                     <TranslateTransform X="0" />
+                  </TransformGroup>
+               </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Name="Step2" FontWeight="Light" FontSize="36" Margin="50,0,0,0" Text="Users" Opacity="0">
+               <TextBlock.RenderTransform>
+                  <TransformGroup>
+                     <TranslateTransform X="0" />
+                  </TransformGroup>
+               </TextBlock.RenderTransform>
+            </TextBlock>
+         </StackPanel>
+      </StackPanel>
+   </Grid>
+</Page>

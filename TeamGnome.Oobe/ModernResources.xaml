@@ -1,0 +1,150 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+   <SolidColorBrush x:Key="GenericInteractingBrush" Color="#66FFFFFF" />
+   <SolidColorBrush x:Key="TranslucentAccent" Color="#22FFFFFF" />
+   <Style TargetType="{x:Type Button}">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="White" />
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="FontFamily" Value="Segoe UI Semibold" />
+      <Setter Property="BorderBrush" Value="White" />
+      <Setter Property="BorderThickness" Value="2" />
+      <Setter Property="Template">
+         <Setter.Value>
+            <ControlTemplate TargetType="{x:Type Button}">
+               <Border x:Name="Border" Margin="0" Background="{TemplateBinding Control.Background}" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}">
+                  <ContentPresenter HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}" Margin="18,4" VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" RecognizesAccessKey="true" />
+               </Border>
+               <ControlTemplate.Triggers>
+                  <Trigger Property="UIElement.IsMouseOver" Value="true">
+                     <Setter TargetName="Border" Property="Border.Background" Value="{DynamicResource TranslucentAccent}" />
+                  </Trigger>
+                  <Trigger Property="ButtonBase.IsPressed" Value="true">
+                     <Setter Value="{DynamicResource GenericInteractingBrush}" TargetName="Border" Property="Border.Background" />
+                  </Trigger>
+                  <Trigger Property="UIElement.IsEnabled" Value="false">
+                     <Setter Value="0.5" Property="Control.Opacity" />
+                  </Trigger>
+               </ControlTemplate.Triggers>
+            </ControlTemplate>
+         </Setter.Value>
+      </Setter>
+   </Style>
+   <SolidColorBrush x:Key="TextBoxBackgroundThemeBrush" Color="#FFFFFFFF" />
+   <SolidColorBrush x:Key="TextBoxBorderThemeBrush" Color="#FFFFFFFF" />
+   <SolidColorBrush x:Key="TextBoxForegroundThemeBrush" Color="#FF000000" />
+   <Thickness x:Key="TextControlBorderThemeThickness">2</Thickness>
+   <Thickness x:Key="TextControlThemePadding">10,5,10,5</Thickness>
+   <SolidColorBrush x:Key="TextBoxDisabledBackgroundThemeBrush" Color="Transparent" />
+   <SolidColorBrush x:Key="TextBoxDisabledBorderThemeBrush" Color="#66FFFFFF" />
+   <SolidColorBrush x:Key="TextBoxDisabledForegroundThemeBrush" Color="#FF666666" />
+   <sys:Double x:Key="TextControlBackgroundThemeOpacity">0.8</sys:Double>
+   <sys:Double x:Key="TextControlBorderThemeOpacity">0.8</sys:Double>
+   <sys:Double x:Key="TextControlPointerOverBackgroundThemeOpacity">0.87</sys:Double>
+   <sys:Double x:Key="TextControlPointerOverBorderThemeOpacity">0.87</sys:Double>
+   <Style x:Key="ModernTextBox" TargetType="{x:Type TextBox}">
+      <Setter Property="MinWidth" Value="64" />
+      <Setter Property="MinHeight" Value="32" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBoxForegroundThemeBrush}" />
+      <Setter Property="Background" Value="{DynamicResource TextBoxBackgroundThemeBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderThemeBrush}" />
+      <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThickness}" />
+      <Setter Property="FontFamily" Value="Segoe UI Semilight" />
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
+      <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
+      <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}" />
+      <Setter Property="Template">
+         <Setter.Value>
+            <ControlTemplate TargetType="{x:Type TextBox}">
+               <Grid SnapsToDevicePixels="true">
+                  <Border x:Name="BackgroundElement" Background="{TemplateBinding Control.Background}" Margin="{TemplateBinding Control.BorderThickness}" Grid.ColumnSpan="2" />
+                  <Border x:Name="BorderElement" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Grid.ColumnSpan="2" />
+                  <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
+               </Grid>
+               <ControlTemplate.Triggers>
+                  <Trigger Property="UIElement.IsEnabled" Value="false">
+                     <Setter Value="{DynamicResource TextBoxDisabledBackgroundThemeBrush}" Property="Control.Background" />
+                     <Setter Value="{DynamicResource TextBoxDisabledBorderThemeBrush}" Property="Control.BorderBrush" />
+                     <Setter Value="{DynamicResource TextBoxDisabledForegroundThemeBrush}" Property="Control.Foreground" />
+                  </Trigger>
+                  <Trigger Property="UIElement.IsKeyboardFocused" Value="false">
+                     <Setter TargetName="BackgroundElement" Value="{DynamicResource TextControlBackgroundThemeOpacity}" Property="UIElement.Opacity" />
+                     <Setter TargetName="BorderElement" Value="{DynamicResource TextControlBorderThemeOpacity}" Property="UIElement.Opacity" />
+                  </Trigger>
+                  <MultiTrigger>
+                     <MultiTrigger.Conditions>
+                        <Condition Property="UIElement.IsKeyboardFocused" Value="false" />
+                        <Condition Property="UIElement.IsMouseOver" Value="true" />
+                     </MultiTrigger.Conditions>
+                     <Setter TargetName="BackgroundElement" Value="{DynamicResource TextControlPointerOverBackgroundThemeOpacity}" Property="UIElement.Opacity" />
+                     <Setter TargetName="BorderElement" Value="{DynamicResource TextControlPointerOverBorderThemeOpacity}" Property="UIElement.Opacity" />
+                  </MultiTrigger>
+               </ControlTemplate.Triggers>
+            </ControlTemplate>
+         </Setter.Value>
+      </Setter>
+      <Style.Triggers>
+         <MultiTrigger>
+            <MultiTrigger.Conditions>
+               <Condition Property="TextBoxBase.IsInactiveSelectionHighlightEnabled" Value="true" />
+               <Condition Property="TextBoxBase.IsSelectionActive" Value="false" />
+            </MultiTrigger.Conditions>
+            <Setter Property="TextBoxBase.SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
+         </MultiTrigger>
+      </Style.Triggers>
+   </Style>
+   <Style x:Key="ModernTextBoxP" TargetType="{x:Type PasswordBox}">
+      <Setter Property="MinWidth" Value="64" />
+      <Setter Property="MinHeight" Value="32" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBoxForegroundThemeBrush}" />
+      <Setter Property="Background" Value="{DynamicResource TextBoxBackgroundThemeBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderThemeBrush}" />
+      <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThickness}" />
+      <Setter Property="FontFamily" Value="Segoe UI Semilight" />
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
+      <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
+      <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}" />
+      <Setter Property="Template">
+         <Setter.Value>
+            <ControlTemplate TargetType="{x:Type PasswordBox}">
+               <Grid SnapsToDevicePixels="true">
+                  <Border x:Name="BackgroundElement" Background="{TemplateBinding Control.Background}" Margin="{TemplateBinding Control.BorderThickness}" Grid.ColumnSpan="2" />
+                  <Border x:Name="BorderElement" BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="{TemplateBinding Control.BorderThickness}" Grid.ColumnSpan="2" />
+                  <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
+               </Grid>
+               <ControlTemplate.Triggers>
+                  <Trigger Property="UIElement.IsEnabled" Value="false">
+                     <Setter Value="{DynamicResource TextBoxDisabledBackgroundThemeBrush}" Property="Control.Background" />
+                     <Setter Value="{DynamicResource TextBoxDisabledBorderThemeBrush}" Property="Control.BorderBrush" />
+                     <Setter Value="{DynamicResource TextBoxDisabledForegroundThemeBrush}" Property="Control.Foreground" />
+                  </Trigger>
+                  <Trigger Property="UIElement.IsKeyboardFocused" Value="false">
+                     <Setter TargetName="BackgroundElement" Value="{DynamicResource TextControlBackgroundThemeOpacity}" Property="UIElement.Opacity" />
+                     <Setter TargetName="BorderElement" Value="{DynamicResource TextControlBorderThemeOpacity}" Property="UIElement.Opacity" />
+                  </Trigger>
+                  <MultiTrigger>
+                     <MultiTrigger.Conditions>
+                        <Condition Property="UIElement.IsKeyboardFocused" Value="false" />
+                        <Condition Property="UIElement.IsMouseOver" Value="true" />
+                     </MultiTrigger.Conditions>
+                     <Setter TargetName="BackgroundElement" Value="{DynamicResource TextControlPointerOverBackgroundThemeOpacity}" Property="UIElement.Opacity" />
+                     <Setter TargetName="BorderElement" Value="{DynamicResource TextControlPointerOverBorderThemeOpacity}" Property="UIElement.Opacity" />
+                  </MultiTrigger>
+               </ControlTemplate.Triggers>
+            </ControlTemplate>
+         </Setter.Value>
+      </Setter>
+      <Style.Triggers>
+         <MultiTrigger>
+            <MultiTrigger.Conditions>
+               <Condition Property="TextBoxBase.IsInactiveSelectionHighlightEnabled" Value="true" />
+               <Condition Property="TextBoxBase.IsSelectionActive" Value="false" />
+            </MultiTrigger.Conditions>
+            <Setter Property="TextBoxBase.SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
+         </MultiTrigger>
+      </Style.Triggers>
+   </Style>
+</ResourceDictionary>

@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+﻿using System.Windows;
+using System.Windows.Media.Animation;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TeamGnome.Oobe
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -26,24 +14,35 @@ namespace TeamGnome.Oobe
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ProcessStartInfo psi = new ProcessStartInfo
+            double calcdWidth = ContentGrid.ActualWidth / ContentGrid.ActualHeight * 0.13;
+            ContentGrid.ColumnDefinitions[0].Width = new GridLength(calcdWidth, GridUnitType.Star);
+            ContentGrid.ColumnDefinitions[2].Width = ContentGrid.ColumnDefinitions[0].Width;
+            NavigatePage("INITIALPAGE");
+        }
+
+        private void ContentFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            Storyboard frameAnimation = (Storyboard)FindResource("FrameEffect");
+            frameAnimation.Begin();
+        }
+
+        public void NavigatePage(string pageName)
+        {
+            pageName = pageName.ToUpper();
+            switch (pageName)
             {
-                FileName = "net",
-                Arguments = $"user {UserText.Text} {PassText.Password} /add",
-                CreateNoWindow = true
-            };
-
-            Process p = Process.Start(psi);
-            p.WaitForExit();
-
-            psi.Arguments = $"localgroup Administrators {UserText.Text} /add";
-
-            p = Process.Start(psi);
-            p.WaitForExit();
-
-            Application.Current.Shutdown();
+                case "INITIALPAGE":
+                    ContentFrame.Content = new InitialPage();
+                    break;
+                case "COMPUTERNAME":
+                    ContentFrame.Content = new ComputerNamePage();
+                    break;
+                case "CREATEUSER":
+                    ContentFrame.Content = new CreateUserPage();
+                    break;
+            }
         }
     }
 }
