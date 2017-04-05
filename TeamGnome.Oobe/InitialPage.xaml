@@ -75,7 +75,7 @@
          </TransformGroup>
       </Grid.RenderTransform>
       <StackPanel VerticalAlignment="Center">
-         <TextBlock FontWeight="Light" FontSize="26" Margin="0,0,0,10">A few finishing touches are required</TextBlock>
+         <TextBlock FontWeight="Light" FontSize="25" Margin="0,0,0,10">A few finishing touches are required</TextBlock>
          <StackPanel Name="StepsStackPanel" Orientation="Horizontal">
             <TextBlock Name="Step1" FontWeight="Light" FontSize="36" Margin="0,0,0,0" Text="Computer name" Opacity="0">
                <TextBlock.RenderTransform>
