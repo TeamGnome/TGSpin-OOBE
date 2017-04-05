@@ -53,7 +53,7 @@ namespace TeamGnome.Oobe
             ProcessStartInfo psi = new ProcessStartInfo
             {
                 FileName = "wmic",
-                Arguments = $"wmic computersystem where caption='{Environment.GetEnvironmentVariable("COMPUTERNAME")}' call rename {ComputerNameText.Text}",
+                Arguments = $"computersystem where caption='{Environment.GetEnvironmentVariable("COMPUTERNAME")}' call rename {ComputerNameText.Text}",
                 CreateNoWindow = true
             };
 
